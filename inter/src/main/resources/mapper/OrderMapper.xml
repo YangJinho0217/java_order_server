@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="star.inter.dao.OrderDao">
+
+    <select id="selectOrderList" resultType="map" parameterType="map">
+        select a.id AS id
+             , a.user_id AS userId
+             , a.order_name AS orderName
+             , date_format(rgst_dt, '%y-%m-%d') AS rgstDt
+        from   user_order a
+        where  a.user_id = #{userId}
+        limit 1
+    </select>
+
+    <insert id="insertOrder" parameterType="map">
+        insert into user_order
+        (
+            user_id
+          , order_name
+        )
+        values
+        (
+            #{userId}
+          , #{orderName}
+        )
+    </insert>
+
+    <select id="selectTodayOrderList" resultType="map">
+      select a.user_id AS userId
+           , b.user_name AS userName
+           , a.order_name AS orderName
+           , DATE_format(a.rgst_dt,'%Y-%m-%d') AS rgstDt
+      from   user_order a, user_Info b
+      where  a.user_id = b.user_id 
+      AND    DATE_format(a.rgst_dt,'%Y-%m-%d') = curdate()
+    </select>
+    
+</mapper>

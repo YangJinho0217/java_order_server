@@ -1,0 +1,65 @@
+spring:
+  datasource:
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://dwcnc.iptime.org:2706/test?serverTimezone=Asia/Seoul&useUniCode=yes&characterEncoding=UTF-8
+    username: yjh
+    password: tjsghk@0217
+
+## Swagger
+springdoc:
+  swagger-ui:
+    path: /swagger
+    operations-sorter: alpha
+    defaultModelsExpandDepth: -1 # swagger schemas hidden
+  use-fqn: true
+  api-docs:
+    resolve-schema-properties: true
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:log4jdbc:mysql://dwcnc.iptime.org:2706/test?serverTimezone=Asia/Seoul&useUniCode=yes&characterEncoding=UTF-8
+    username: yjh
+    password: tjsghk@0217
+logging:
+  level:
+    root: info
+    com:
+      dw: debug
+    jdbc:
+      sqlonly: debug
+      sqltiming: off
+      audit: off
+      resultset: off
+      resultsettable: debug
+      connection: off
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:log4jdbc:mysql://dwcnc.iptime.org:2706/test?serverTimezone=Asia/Seoul&useUniCode=yes&characterEncoding=UTF-8
+    username: yjh
+    password: tjsghk@0217
+logging:
+  level:
+    root: info
+    com:
+      dw: info
+    jdbc:
+      sqlonly: info
+      sqltiming: off
+      audit: off
+      resultset: off
+      resultsettable: info
+      connection: off

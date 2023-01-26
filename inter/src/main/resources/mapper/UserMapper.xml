@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="star.inter.dao.UserDao">
+
+    <select id="selectAppLogin" resultType="map" parameterType="map">
+        select a.user_id AS userId
+             , a.user_password AS userPassword
+             , a.user_name AS userName
+             , a.user_rank AS userRank
+             , a.user_room AS userRoom
+             , a.user_phone AS userPhone
+             , a.rgst_dt AS rgstDt
+        from   user_Info a
+        where a.user_id = #{userId}
+    </select>
+
+    <select id="selectAppId" resultType="map" parameterType="map">
+        select a.user_id AS userId
+        from user_Info a
+        where a.user_id = #{userId}
+    </select>
+
+    <insert id="insertAppSignUp" parameterType="map">
+        insert into user_Info
+        (
+            user_id
+        , user_password
+        , user_name
+        , user_rank
+        , user_room
+        , user_phone
+        )
+        values
+        (
+          #{userId}
+        , #{passwd}
+        , #{userName}
+        , #{userRank}
+        , #{userRoom}
+        , #{userPhone}
+        )
+    </insert>
+    
+</mapper>
